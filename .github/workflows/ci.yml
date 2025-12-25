@@ -35,7 +35,7 @@ jobs:
 
       # 4. Run pre-commit hooks
       - name: Run pre-commit hooks
-        uses: pre-commit/action@v3
+        uses: pre-commit/action@v3.0.1
         with:
           extra_args: --all-files
 
