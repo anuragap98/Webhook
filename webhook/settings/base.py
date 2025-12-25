@@ -2,12 +2,14 @@ from pathlib import Path
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# Make BASE_DIR the project root (two parents gets 'webhook', we need the directory above it)
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Application definition
 INSTALLED_APPS = [
     "apps.hello",
+    "apps.users",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -31,7 +33,7 @@ ROOT_URLCONF = "webhook.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -85,3 +87,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
+
+# Tell Django to look in the project `static/` directory during development
+STATICFILES_DIRS = [BASE_DIR / "static"]
