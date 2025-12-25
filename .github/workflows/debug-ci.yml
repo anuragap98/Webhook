@@ -1,0 +1,17 @@
+name: Debug CI
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  runner-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print runner info
+        run: |
+          echo "RUNNER: $RUNNER_NAME"
+          uname -a
+          echo "ENV:"
+          env | sort
