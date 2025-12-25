@@ -28,11 +28,11 @@ This repository contains a Django project. This README explains how to set up th
    pip install "Django>=4.2,<5"
    ```
 
-   or 
+   or
    run the below command to install using `requirement.txt`
    ```bash
    pip install -r requirements.txt
-   ``` 
+   ```
 
 3. Run database migrations
 
@@ -121,4 +121,3 @@ You can copy `.env.example` and fill values for your deployment:
 cp .env.example .env
 # then edit .env and set secrets
 ```
-
