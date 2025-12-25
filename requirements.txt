@@ -1,0 +1,12 @@
+asgiref==3.11.0
+certifi==2025.11.12
+Django==4.2.27
+django-csp==4.0
+packaging==25.0
+psycopg2-binary==2.9.11
+python-decouple==3.8
+sentry-sdk==2.48.0
+setuptools==80.9.0
+sqlparse==0.5.5
+urllib3==2.6.2
+wheel==0.45.1
