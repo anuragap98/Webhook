@@ -36,7 +36,7 @@ jobs:
           pip install pre-commit ruff black
 
       - name: Run pre-commit hooks
-        uses: pre-commit/action@v4.2.0
+        uses: pre-commit/action@v4
         with:
           extra_args: --all-files
 
