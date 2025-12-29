@@ -196,6 +196,44 @@ python manage.py migrate
 
 ---
 
+## Commands to Create New App
+
+1. Create the Directory
+    ```bash
+    # Create the apps folder if you haven't yet
+    mkdir -p apps/my_new_app
+
+    # Ensure apps/ is a Python package (important for older Django versions)
+    touch apps/__init__.py
+    ```
+
+2. Run the `startapp` Command
+    ```bash
+    python manage.py startapp new_app apps/new_app
+    ```
+
+3. Update the App Configuration
+    ```bash
+    # apps/my_new_app/apps.py
+
+    from django.apps import AppConfig
+
+    class MyNewAppConfig(AppConfig):
+        default_auto_field = 'django.db.models.BigAutoField'
+        name = 'apps.my_new_app'  # <--- Add 'apps.' here
+    ```
+4. Register in `settings.py`
+    ```bash
+    # your_project/settings.py
+
+    INSTALLED_APPS = [
+        # ...
+        'apps.my_new_app',
+    ]
+    ```
+
+---
+
 ## Admin site
 
 Visit `/admin/` after creating a superuser with `python manage.py createsuperuser`.

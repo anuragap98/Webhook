@@ -2,18 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}Site{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %} Webhook Project {% endblock %}</title>
+  {% load static %}
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}"/>
 </head>
 <body>
-  <header>
-    <h1>My Project</h1>
-  </header>
-  <main>
-    {% block content %}{% endblock %}
-  </main>
-  <footer>
-    <small>&copy; {{ now|date:"Y" }}</small>
-  </footer>
+  <div class="app">
+    <header class="site-header">
+      <div class="container">
+        <div class="header-inner">
+          <nav class="navbar" role="navigation" aria-label="main navigation">
+            <a href="{% url 'home' %}" class="logo-link">
+              <img src="{% static 'images/logo.png' %}" alt="Webhook Logo" class="navbar-logo" />
+            </a>
+
+            <div class="navbar-items">
+              <a href="{% url 'home' %}" class="navbar-item">Home</a>
+              <a href="{% url 'dashboard' %}" class="navbar-item">Dashboard</a>
+              <a href="{% url 'contact' %}" class="navbar-item">Contact</a>
+              <a href="{% url 'log' %}" class="navbar-item btn btn-primary nav-cta">Log Message</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="site-main container">
+      <header class="page-header">
+        <h1>{% block header %} {% endblock %}</h1>
+      </header>
+      <section class="page-content">
+        {% block content %}{% endblock %}
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <hr style="border: 0; border-top: 1px solid var(--border); margin-bottom: 20px;" />
+        <div class="footer-inner" style="text-align: center;">
+          <small>&copy; 2026 Webhook Flow. All rights reserved.</small>
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>

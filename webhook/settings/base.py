@@ -8,8 +8,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Application definition
 INSTALLED_APPS = [
-    "apps.hello",
+    "rest_framework",
+    "apps.blog",
     "apps.users",
+    "apps.webhooks",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -80,10 +82,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
+
+# Set to your local timezone
+TIME_ZONE = "Asia/Kolkata"
+
 USE_I18N = True
 USE_TZ = True
 
+
+# Templates configuration
+TEMPLATES[0]["DIRS"] = [BASE_DIR / "templates"]
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"

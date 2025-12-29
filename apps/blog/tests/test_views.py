@@ -2,8 +2,8 @@ from django.test import TestCase, RequestFactory
 from django.urls import reverse
 from django.utils import timezone
 
-from apps.hello.models import LogMessage
-from apps.hello.views import log_message
+from apps.blog.models import LogMessage
+from apps.blog.views import log_message
 
 
 class LogMessageModelTests(TestCase):

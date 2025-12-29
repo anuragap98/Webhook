@@ -15,18 +15,8 @@ class HomeListView(ListView):
         return context
 
 
-def about(request):
-    return render(request, "hello/about.html")
-
-
 def contact(request):
-    return render(request, "hello/contact.html")
-
-
-def hello_there(request, name):
-    return render(
-        request, "hello/hello_there.html", {"name": name, "date": timezone.now()}
-    )
+    return render(request, "blog/contact.html")
 
 
 def log_message(request):
@@ -39,8 +29,11 @@ def log_message(request):
 
     if request.method == "POST" and form.is_valid():
         message = form.save(commit=False)
+        # Save as UTC-aware datetime. Django will store datetimes in UTC when USE_TZ = True.
+        # Convert to a local timezone only when presenting timestamps to users.
         message.log_date = timezone.now()
         message.save()
+        # Redirect to the home view (named 'home') which lists recent messages
         return redirect("home")
 
-    return render(request, "hello/log_message.html", {"form": form})
+    return render(request, "blog/log_message.html", {"form": form})

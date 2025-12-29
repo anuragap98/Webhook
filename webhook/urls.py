@@ -19,7 +19,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path("", include("apps.hello.urls")),
-    path("users/", include("apps.users.urls")),
     path("admin/", admin.site.urls),
+    path("", include("apps.blog.urls")),
+    path("users/", include("apps.users.urls")),
+    path("webhooks/", include("apps.webhooks.urls")),
 ]
