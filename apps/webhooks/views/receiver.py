@@ -1,7 +1,7 @@
 import json
 from django.http import JsonResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
-from ..services import process_webhook
+from ..services.dispatcher import process_webhook
 from ..models import WebhookEvent, WebhookLog
 
 
