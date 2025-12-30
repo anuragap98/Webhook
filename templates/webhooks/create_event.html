@@ -5,9 +5,9 @@
 {% block header %}Create Webhook Event{% endblock %}
 
 {% block content %}
-<div class="webhook-create-card">
-  <h2 class="sub-title">Trigger Simulation</h2>
-  <p class="tz-note">Manually fire a test event to your configured endpoints.</p>
+<div class="webhook-create-card" style="margin: 0 auto;">
+  <h2 class="sub-title" style="text-align: center;">Trigger Simulation</h2>
+  <p class="tz-note" style="text-align: center;">Manually fire a test event to your configured endpoints.</p>
 
   <form method="post" class="webhook-create-form modern-form">
     {% csrf_token %}
@@ -15,10 +15,13 @@
     <div class="form-group">
       <label for="event_type" class="webhook-label">Event Type</label>
       <select id="event_type" name="event_type" class="webhook-select form-control">
+        <option value="order.created">Order Created</option>
+        <option value="order.updated">Order Updated</option>
+        <option value="order.cancelled">Order Cancelled</option>
         <option value="payment.succeeded">Payment Succeeded</option>
         <option value="payment.failed">Payment Failed</option>
         <option value="payment.refunded">Payment Refunded</option>
-        <option value="payment.chargeback">Chargeback</option>
+        <option value="payment.chargeback">Payment Chargeback</option>
       </select>
       <span class="help-text">Select the scenario you want to simulate.</span>
     </div>
@@ -27,7 +30,7 @@
       <label for="endpoint" class="webhook-label">Target Endpoint</label>
       <select id="endpoint" name="endpoint" class="webhook-select form-control">
         {% for ep in endpoints %}
-          <option value="{{ ep.id }}">{{ ep.name }}</option>
+        <option value="{{ ep.id }}">{{ ep.name }}</option>
         {% endfor %}
       </select>
     </div>
@@ -36,10 +39,15 @@
   </form>
 </div>
 
-{% if result %}
-  <div class="data-card" style="max-width: 640px;">
-    <h3 class="sub-title">Simulation Result</h3>
-    <pre class="message-cell" style="background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #e6e9ee; font-size: 0.85rem;">{{ result }}</pre>
+{% if messages %}
+<div class="data-card" style="max-width: 640px; margin: 2rem auto;">
+  <h3 class="sub-title">Simulation Result</h3>
+  {% for message in messages %}
+  <div class="message-cell {% if message.tags %}alert-{{ message.tags }}{% endif %}"
+    style="background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #e6e9ee; font-size: 0.85rem; white-space: pre-wrap; word-break: break-all; margin-bottom: 0.5rem;">
+    {{ message }}
   </div>
+  {% endfor %}
+</div>
 {% endif %}
 {% endblock %}

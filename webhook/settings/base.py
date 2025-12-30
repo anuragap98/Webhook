@@ -12,6 +12,7 @@ INSTALLED_APPS = [
     "apps.blog",
     "apps.users",
     "apps.webhooks",
+    "apps.orders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

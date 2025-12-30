@@ -2,44 +2,52 @@
 {% load tz %}
 
 {% block title %}
-    Home
+Home
 {% endblock %}
 
 {% block header %}
-    Welcome to the Project
+Welcome to the Project
 {% endblock %}
 
 {% block content %}
-  <h2 class="sub-title">Logged messages</h2>
-  <div class="description">Recent messages logged by users and systems.</div>
+<div class="home-header">
+  <div>
+    <h2 class="sub-title">Logged messages</h2>
+    <div class="description">Recent messages logged by users and systems.</div>
+  </div>
+  <a href="{% url 'log' %}" class="btn btn-primary">+ Log Message</a>
+</div>
 
-  {% if message_list %}
-    <div class="data-card">
-      <div class="table-wrapper">
-        <table class="modern-table message_list" aria-describedby="message-table">
-          <thead>
-            <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Time (IST)</th>
-              <th scope="col">Message</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for message in message_list %}
-              <tr>
-                <td>{{ message.log_date | date:'d M Y' }}</td>
-                {% load tz %}
-                <td>{{ message.log_date | localtime | time:'H:i' }}</td>
-                <td><div class="message-cell">{{ message.message }}</div></td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  {% else %}
-    <div class="empty-state">
-      <p>No messages have been logged. Use the <a href="{% url 'log' %}">Log Message form</a>.</p>
-    </div>
-  {% endif %}
+
+{% if message_list %}
+<div class="data-card">
+  <div class="table-wrapper">
+    <table class="modern-table message_list" aria-describedby="message-table">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Time (IST)</th>
+          <th scope="col">Message</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for message in message_list %}
+        <tr>
+          <td>{{ message.log_date | date:'d M Y' }}</td>
+          {% load tz %}
+          <td>{{ message.log_date | localtime | time:'H:i' }}</td>
+          <td>
+            <div class="message-cell">{{ message.message }}</div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+<div class="empty-state">
+  <p>No messages have been logged. Use the <a href="{% url 'log' %}">Log Message form</a>.</p>
+</div>
+{% endif %}
 {% endblock %}

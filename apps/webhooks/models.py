@@ -30,14 +30,22 @@ class WebhookEndpoint(models.Model):
 
 class WebhookEvent(models.Model):
     EVENT_TYPES = [
+        ("received", "Received"),
+        ("processing", "Processing"),
+        ("processed", "Processed"),
+        ("order.created", "Order Created"),
+        ("order.updated", "Order Updated"),
+        ("order.cancelled", "Order Cancelled"),
         ("payment.succeeded", "Payment Succeeded"),
         ("payment.failed", "Payment Failed"),
         ("payment.refunded", "Payment Refunded"),
-        ("payment.chargeback", "Chargeback"),
+        ("payment.chargeback", "Payment Chargeback"),
     ]
 
     STATUS_CHOICES = [
         ("pending", "Pending"),
+        ("processing", "Processing"),
+        ("processed", "Processed"),
         ("sent", "Sent"),
         ("failed", "Failed"),
     ]
@@ -57,7 +65,13 @@ class WebhookLog(models.Model):
         WebhookEvent, on_delete=models.CASCADE, related_name="logs"
     )
     status = models.CharField(max_length=20)
-    message = models.TextField(blank=True)
+    response_body = models.TextField(
+        blank=True, help_text="Response body from the destination"
+    )
+    request_headers = models.JSONField(
+        default=dict, blank=True, help_text="Headers sent or received"
+    )
+    message = models.TextField(blank=True, help_text="Human readable summary")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -11,7 +11,7 @@ class LogMessageForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "placeholder": "Enter your message here",
-                    "rows": 4,
+                    "rows": 6,
                 }
             )
         }
