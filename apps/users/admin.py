@@ -1,4 +1,3 @@
-# Register your models here. Example:
 from .models import Profile
 from django.contrib import admin
 

@@ -5,25 +5,24 @@ from .forms import LogMessageForm
 from .models import LogMessage
 
 
-class HomeListView(ListView):
-    """Renders the home page, with a list of all messages."""
+class BlogListView(ListView):
+    """Renders the blog page, with a list of all messages."""
 
     model = LogMessage
+    queryset = LogMessage.objects.order_by("-log_date")[:5]
+    context_object_name = "message_list"
+    template_name = "blog/blog.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
 
 
-def contact(request):
-    return render(request, "blog/contact.html")
-
-
-def log_message(request):
-    """Render and process the log message form.
+def blog_message(request):
+    """Render and process the blog message form.
 
     The view renders the form on GET and renders the form with errors on
-    invalid POST. On valid POST it saves and redirects to `home`.
+    invalid POST. On valid POST it saves and redirects to `blog`.
     """
     form = LogMessageForm(request.POST or None)
 
@@ -33,7 +32,7 @@ def log_message(request):
         # Convert to a local timezone only when presenting timestamps to users.
         message.log_date = timezone.now()
         message.save()
-        # Redirect to the home view (named 'home') which lists recent messages
-        return redirect("home")
+        # Redirect to the blog view (named 'blog') which lists recent messages
+        return redirect("blog")
 
-    return render(request, "blog/log_message.html", {"form": form})
+    return render(request, "blog/blog_message.html", {"form": form})

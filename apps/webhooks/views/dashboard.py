@@ -2,15 +2,11 @@ from django.shortcuts import render
 from ..models import WebhookEvent, WebhookLog
 
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from apps.users.decorators import normal_user_required
 
 
-@login_required
+@normal_user_required
 def dashboard(request):
-    if request.user.is_staff:
-        return redirect("/admin/")
-
     # Metrics
     total_events = WebhookEvent.objects.count()
 

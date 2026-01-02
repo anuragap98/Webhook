@@ -6,7 +6,7 @@ Home
 {% endblock %}
 
 {% block header %}
-Welcome to the Project
+Welcome to the Your Blog
 {% endblock %}
 
 {% block content %}
@@ -16,7 +16,7 @@ Welcome to the Project
     <h2 class="sub-title">Logged messages</h2>
     <div class="description">Recent messages logged by users and systems.</div>
   </div>
-  <a href="{% url 'log' %}" class="btn btn-primary">+ Log Message</a>
+  <a href="{% url 'blog_message' %}" class="btn btn-primary">+ Add Blog</a>
 </div>
 
 {% else %}

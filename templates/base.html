@@ -16,14 +16,14 @@
       <div class="container">
         <div class="header-inner">
           <nav class="navbar" role="navigation" aria-label="main navigation">
-            <a href="{% url 'home' %}" class="logo-link">
+            <a href="{% url 'dashboard' %}" class="logo-link">
               <img src="{% static 'images/logo.png' %}" alt="Webhook Logo" class="navbar-logo" />
             </a>
 
             <div class="navbar-items">
-              <a href="{% url 'home' %}" class="navbar-item">Home</a>
-              {% if user.is_authenticated %}
               <a href="{% url 'dashboard' %}" class="navbar-item">Dashboard</a>
+              <a href="{% url 'blog' %}" class="navbar-item">Blog</a>
+              {% if user.is_authenticated %}
               <a href="{% url 'users:profile' %}" class="navbar-item">Profile</a>
               <a href="{% url 'users:logout' %}" class="navbar-item">Logout</a>
               {% else %}
