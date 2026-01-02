@@ -8,8 +8,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Application definition
 INSTALLED_APPS = [
-    "apps.hello",
+    "rest_framework",
+    "apps.blog",
     "apps.users",
+    "apps.webhooks",
+    "apps.orders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -24,6 +27,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "apps.users.middleware.RedirectStaffMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -80,13 +84,24 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
+
+# Set to your local timezone
+TIME_ZONE = "Asia/Kolkata"
+
 USE_I18N = True
 USE_TZ = True
 
+
+# Templates configuration
+TEMPLATES[0]["DIRS"] = [BASE_DIR / "templates"]
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
 
 # Tell Django to look in the project `static/` directory during development
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Auth Redirects
+LOGIN_URL = "users:login"
+LOGIN_REDIRECT_URL = "dashboard"
+LOGOUT_REDIRECT_URL = "users:login"

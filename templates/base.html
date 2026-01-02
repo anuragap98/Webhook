@@ -1,19 +1,69 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}Site{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %} Webhook Project {% endblock %}</title>
+  {% load static %}
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}?v=1.3" />
 </head>
+
 <body>
-  <header>
-    <h1>My Project</h1>
-  </header>
-  <main>
-    {% block content %}{% endblock %}
-  </main>
-  <footer>
-    <small>&copy; {{ now|date:"Y" }}</small>
-  </footer>
+  <div class="app">
+    <header class="site-header">
+      <div class="container">
+        <div class="header-inner">
+          <nav class="navbar" role="navigation" aria-label="main navigation">
+            <a href="{% url 'dashboard' %}" class="logo-link">
+              <img src="{% static 'images/logo.png' %}" alt="Webhook Logo" class="navbar-logo" />
+            </a>
+
+            <div class="navbar-items">
+              <a href="{% url 'dashboard' %}" class="navbar-item">Dashboard</a>
+              <a href="{% url 'blog' %}" class="navbar-item">Blog</a>
+              {% if user.is_authenticated %}
+              <a href="{% url 'users:profile' %}" class="navbar-item">Profile</a>
+              <a href="{% url 'users:logout' %}" class="navbar-item">Logout</a>
+              {% else %}
+              <a href="{% url 'users:login' %}" class="navbar-item">Login</a>
+              <a href="{% url 'users:register' %}" class="navbar-item">Register</a>
+              {% endif %}
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="site-main container">
+      {% if messages %}
+        <div class="messages container" style="margin-top: 20px;">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <header class="page-header">
+        <h1>{% block header %} {% endblock %}</h1>
+      </header>
+      <section class="page-content">
+        {% block content %}{% endblock %}
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <hr style="border: 0; border-top: 1px solid var(--border);" />
+        <div class="footer-inner" style="text-align: center; padding: 10px 0;">
+          <small>&copy; 2026 Webhook Flow. All rights reserved.</small>
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
+
 </html>
