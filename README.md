@@ -5,6 +5,7 @@
 ---
 
 ## Table of contents 📚
+
 - [Overview](#overview)
 - [Architecture](#architecture)
 - [Requirements](#requirements)
@@ -24,6 +25,7 @@
 ## Overview
 
 This repository is a Django project (Django 4.2.x) organized with application code under the `apps/` package (e.g. `apps/hello`). It includes
+
 - app-level unit tests
 - Black and Ruff for formatting & linting
 - pre-commit configuration to enforce style locally
@@ -84,6 +86,10 @@ python manage.py migrate
 
 ```bash
 python manage.py createsuperuser
+
+# Example
+username: admin
+password: local@123
 ```
 
 6. Run the dev server
@@ -101,7 +107,7 @@ This project uses environment-specific settings under `webhook/settings/`:
 
 - `base.py`: common settings
 - `dev.py`: development defaults (DEBUG=True)
-- `prod.py`: production hardening (SECURE_* settings, Sentry, etc.)
+- `prod.py`: production hardening (SECURE\_\* settings, Sentry, etc.)
 - `test.py`: test settings (in-memory DB, fast hashers)
 
 Switch environments via the `DJANGO_SETTINGS_ENV` environment variable. Example for running with the test settings locally:
@@ -112,6 +118,7 @@ python manage.py test
 ```
 
 Key points:
+
 - Add apps to `INSTALLED_APPS` using their package path, e.g. `"apps.hello"`.
 - Use environment variables for secrets (see `.env.example`).
 
@@ -167,6 +174,7 @@ CI also runs these checks automatically on pushes and pull requests.
 ## CI (GitHub Actions)
 
 A workflow is added at `.github/workflows/ci.yml`. It:
+
 - checks out code
 - sets up Python 3.14
 - installs dependencies
@@ -199,38 +207,43 @@ python manage.py migrate
 ## Commands to Create New App
 
 1. Create the Directory
-    ```bash
-    # Create the apps folder if you haven't yet
-    mkdir -p apps/my_new_app
 
-    # Ensure apps/ is a Python package (important for older Django versions)
-    touch apps/__init__.py
-    ```
+   ```bash
+   # Create the apps folder if you haven't yet
+   mkdir -p apps/my_new_app
+
+   # Ensure apps/ is a Python package (important for older Django versions)
+   touch apps/__init__.py
+   ```
 
 2. Run the `startapp` Command
-    ```bash
-    python manage.py startapp new_app apps/new_app
-    ```
+
+   ```bash
+   python manage.py startapp new_app apps/new_app
+   ```
 
 3. Update the App Configuration
-    ```bash
-    # apps/my_new_app/apps.py
 
-    from django.apps import AppConfig
+   ```bash
+   # apps/my_new_app/apps.py
 
-    class MyNewAppConfig(AppConfig):
-        default_auto_field = 'django.db.models.BigAutoField'
-        name = 'apps.my_new_app'  # <--- Add 'apps.' here
-    ```
+   from django.apps import AppConfig
+
+   class MyNewAppConfig(AppConfig):
+       default_auto_field = 'django.db.models.BigAutoField'
+       name = 'apps.my_new_app'  # <--- Add 'apps.' here
+   ```
+
 4. Register in `settings.py`
-    ```bash
-    # your_project/settings.py
 
-    INSTALLED_APPS = [
-        # ...
-        'apps.my_new_app',
-    ]
-    ```
+   ```bash
+   # your_project/settings.py
+
+   INSTALLED_APPS = [
+       # ...
+       'apps.my_new_app',
+   ]
+   ```
 
 ---
 

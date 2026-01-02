@@ -10,6 +10,7 @@ Welcome to the Project
 {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <div class="home-header">
   <div>
     <h2 class="sub-title">Logged messages</h2>
@@ -18,7 +19,11 @@ Welcome to the Project
   <a href="{% url 'log' %}" class="btn btn-primary">+ Log Message</a>
 </div>
 
-
+{% else %}
+<div class="empty-state">
+  <p>Please <a href="{% url 'users:login' %}">login</a> to log new messages.</p>
+</div>
+{% endif %}
 {% if message_list %}
 <div class="data-card">
   <div class="table-wrapper">

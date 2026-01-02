@@ -99,3 +99,8 @@ STATIC_URL = "static/"
 
 # Tell Django to look in the project `static/` directory during development
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Auth Redirects
+LOGIN_URL = "users:login"
+LOGIN_REDIRECT_URL = "dashboard"
+LOGOUT_REDIRECT_URL = "users:login"
